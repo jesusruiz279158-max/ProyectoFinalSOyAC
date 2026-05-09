@@ -5,7 +5,7 @@ class Proceso:
         self.id = Proceso.contador
         self.t_llegada = t_llegada
         self.t_ejecucion = t_ejecucion
-        self.estado = estado #Puedes ser "Listo", "En Ejecución" o "Terminado"
+        self.estado = estado #Puede ser "Listo", "En Ejecución" o "Terminado"
         self.nombre = nombre
         self.t_espera = 0
         self.t_finalizacion = 0
