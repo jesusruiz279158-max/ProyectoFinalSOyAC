@@ -10,30 +10,19 @@ class SistemaOperativo:
 #Crear un nuevo proceso y agregarlo a la cola de listos.
     def agregar_proceso(self):
 
-    #Ingresar datos del nuevo proceso.
         try:
-            # Intentamos la conversión
             t_llegada = int(input("Ingrese el tiempo de llegada del proceso: "))
-        except ValueError:
-            # Si falla, ejecutamos esto en vez de romper el programa
-            print("¡Eso no es un número entero!")
-
-        try:
-            # Intentamos la conversión
             t_ejecucion = int(input("Ingrese el tiempo de ejecución del proceso: "))
         except ValueError:
-            # Si falla, ejecutamos esto en vez de romper el programa
-            print("¡Eso no es un número entero!")
-        
-        try:
-            #verificion de que el nombre dado por el usuario sea una cadena de texto válida
-            nombre = input("Ingrese el nombre del proceso: ")
-            if nombre == "":
-                print("Nombre de proceso no válido. Por favor, ingrese un nombre.")
-                return
-        except ValueError:
-            print("Nombre de proceso no válido. Por favor, ingrese un nombre.")
+            print("Debe ingresar números enteros.")
             return
+
+        nombre = input("Ingrese el nombre del proceso: ")
+
+        if nombre.strip() == "":
+            print("Nombre de proceso no válido.")
+            return
+
         estado = "Listo"
 
         nuevo_proceso = Proceso(t_llegada, t_ejecucion, estado, nombre)
@@ -44,15 +33,21 @@ class SistemaOperativo:
 
 #Modificar el estado de un proceso específico.
     def modificar_estado_proceso(self, id_proceso, nuevo_estado):
+
+        estados_validos = ["Listo", "En Ejecución", "Terminado"]
+
+        if nuevo_estado not in estados_validos:
+            print("Estado no válido. Por favor, ingrese 'Listo', 'En Ejecución' o 'Terminado'.")
+            return
+
         for proceso in self.procesos:
+
             if proceso.id == id_proceso:
                 proceso.estado = nuevo_estado
-            if nuevo_estado != "Terminado" and nuevo_estado != "En Ejecución" and nuevo_estado != "Listo":
-                print("Estado no válido. Por favor, ingrese 'Listo', 'En Ejecución' o 'Terminado'.")
-                return
-            
+
                 print(f"Estado del proceso '{proceso.nombre}' (ID: {proceso.id}) modificado a '{nuevo_estado}'.")
                 return
+
         print(f"No se encontró un proceso con ID '{id_proceso}'.")
 
 
