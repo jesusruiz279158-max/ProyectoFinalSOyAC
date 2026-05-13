@@ -92,7 +92,8 @@ class SistemaOperativo:
 
             if proceso.estado == "Terminado":
                 continue  # Saltar procesos ya terminados
-
+            
+            #Cambiar el estado del proceso a "En Ejecución" y simular su ejecución.
             proceso.estado = "En Ejecución"
             print(f"Ejecutando proceso '{proceso.nombre}' (ID: {proceso.id})...")
             time.sleep(proceso.t_ejecucion)  # Simular la ejecución del proceso
